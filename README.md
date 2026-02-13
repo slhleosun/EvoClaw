@@ -1,6 +1,8 @@
 # 🧬 EvoClaw - Experience, Reflect, Evolve
 
-**A structured soul evolution framework for AI agents.**
+**A structured soul evolution framework that makes your agents actually learn from experience.**
+
+
 [evoclaw.dev](https://evoclaw.dev)
 
 ---
