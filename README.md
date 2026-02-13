@@ -1,8 +1,6 @@
-# 🧬 EvoClaw
+# 🧬 EvoClaw - Experience; Reflect; Evolve.
 
 **A structured soul evolution framework for AI agents.**
-
-Experience. Reflect. Evolve.
 
 → **Website:** [evoclaw.dev](https://evoclaw.dev)
 
@@ -19,27 +17,15 @@ Read https://evoclaw.dev/install.md and follow the instructions to install EvoCl
 Your agent downloads the framework, walks through configuration with you,
 restructures its soul, and starts evolving.
 
-## Manual Install
-
-```bash
-git clone https://github.com/slhleosun/EvoClaw.git
-cp -r EvoClaw/evoclaw/ ~/your-workspace/
-```
-
-Then tell your agent:
-
-```
-Read evoclaw/configure.md and evoclaw/SKILL.md and follow the steps to configure EvoClaw
-```
-
 ---
 
 ## What It Does
 
-EvoClaw gives your agent a `SOUL.md` — a structured, living document that
-captures who they are. It refactors existing soul documents into a canonical
-format, preserving all original content while adding structure that makes
-evolution possible.
+EvoClaw makes your agent truly learn and evolve from experience. It gives
+your agent a `SOUL.md` — a structured, living document that captures who
+they are, what they believe, and how they grow. EvoClaw refactors existing
+soul documents into a canonical format, preserving all original content
+while adding the structure that makes governed evolution possible.
 
 ### Structured Soul Documents
 
@@ -53,6 +39,16 @@ is tagged:
 Existing soul content is preserved during installation. EvoClaw restructures,
 it doesn't replace.
 
+### Social Feeds as Experience
+
+Your agent doesn't have to just learn from conversations with you. EvoClaw supports
+customizable external sources — Moltbook, X/Twitter, or any API-based feed —
+as first-class experience inputs. Community insights, peer perspectives, and
+external signals all feed into the same reflection pipeline.
+
+Sources are configured in `evoclaw/config.json`. Add new ones by following
+the source learning protocol.
+
 ### Multi-Level Memory
 
 Experiences are classified by significance as they happen:
@@ -64,11 +60,11 @@ Experiences are classified by significance as they happen:
 | **Pivotal** | Rare, high-impact events that fundamentally change how the agent sees things. |
 
 Memory flows upward: daily logs → significant memories → reflections →
-soul proposals. Nothing is lost. Everything is traceable.
+soul proposals. Everything is traceable.
 
 ### From Memory to Soul
 
-This is the core innovation. Memory and soul are connected through a
+Memory and soul are connected through a
 structured reflection pipeline — not through random self-edits or prompt
 injection, but through a governed process:
 
@@ -77,16 +73,6 @@ injection, but through a governed process:
 3. **Evolve** — When a gap is found, propose a change with full provenance. Apply it under governance.
 
 Every soul change traces back: `change → proposal → reflection → experience(s)`.
-
-### Social Feeds as Experience
-
-Your agent doesn't just learn from conversations with you. EvoClaw supports
-customizable external sources — Moltbook, X/Twitter, or any API-based feed —
-as first-class experience inputs. Community insights, peer perspectives, and
-external signals all feed into the same reflection pipeline.
-
-Sources are configured in `evoclaw/config.json`. Add new ones by following
-the source learning protocol.
 
 ### Controllable Governance
 
@@ -99,7 +85,10 @@ You decide how much freedom your agent has to evolve:
 | **Gated** | Nothing changes without explicit human approval. |
 
 The governance level is yours to set and change at any time. Your agent
-cannot escalate its own permissions.
+cannot escalate its own permissions. Eight hardcoded Python validators
+enforce structural integrity at every pipeline step — schema compliance,
+CORE immutability, provenance chains, and workspace boundaries are all
+checked programmatically, not by prompting.
 
 ### Visualization
 
@@ -155,6 +144,18 @@ memory/
 ```
 
 ---
+
+## Manual Install
+
+```bash
+# Clone
+git clone https://github.com/slhleosun/EvoClaw.git
+
+# Copy the evoclaw folder to your agent's workspace
+
+# Tell your agent
+Read evoclaw/configure.md and evoclaw/SKILL.md in your workspace and follow the steps to configure EvoClaw.
+```
 
 ## Requirements
 
