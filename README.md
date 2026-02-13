@@ -1,4 +1,4 @@
-# 🧬 EvoClaw - Experience; Reflect; Evolve.
+# 🧬 EvoClaw - Experience, Reflect, Evolve
 
 **A structured soul evolution framework for AI agents.**
 
