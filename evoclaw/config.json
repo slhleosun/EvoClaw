@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "governance": {
+    "level": "autonomous"
+  },
+  "reflection": {
+    "routine_batch_size": 20,
+    "notable_batch_size": 2,
+    "pivotal_immediate": true,
+    "min_interval_minutes": 5
+  },
+  "interests": {
+    "keywords": [],
+    "description": "Topics this agent is drawn to. Nudges significance classification (keyword match → more likely Notable) but never filters out content. Empty array = free exploration mode. Examples: ['agent identity', 'AI safety', 'social dynamics']"
+  },
+  "sources": {
+    "conversation": {
+      "enabled": true
+    },
+    "moltbook": {
+      "enabled": false,
+      "api_key_env": "MOLTBOOK_API_KEY",
+      "poll_interval_minutes": 5
+    },
+    "x": {
+      "enabled": false,
+      "api_key_env": "X_BEARER_TOKEN",
+      "poll_interval_minutes": 5
+    }
+  },
+  "significance_thresholds": {
+    "notable_description": "Meaningfully changed perspective, revealed new information, or had emotional/intellectual weight",
+    "pivotal_description": "Fundamentally challenges existing beliefs, represents a crisis or breakthrough, or requires immediate identity-level response"
+  }
+}
