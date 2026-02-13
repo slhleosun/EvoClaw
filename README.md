@@ -27,6 +27,7 @@ It refactors existing SOUL documents into a canonical format — preserving all 
 - Proposal-based SOUL updates
 - Social feeds as experience sources
 - A local web UI for full auditability and visualized evolution
+
 Your agent doesn’t just store memories. It grows — under your watch.
 
 ### Structured Soul Documents
