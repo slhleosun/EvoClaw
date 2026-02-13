@@ -834,7 +834,7 @@ body::after {{
       <h2>Soul Map</h2>
       <div class="spacer"></div>
       <button class="btn-edit" id="btn-edit" onclick="toggleEditMode()">✎ Edit</button>
-      <button class="btn-save" id="btn-save" onclick="saveSoul()" style="display:none">↓ Save SOUL.md</button>
+      <button class="btn-save" id="btn-save" onclick="saveSoul()" style="display:none">💾 Save SOUL.md</button>
     </div>
     <div id="soul-tree"></div>
   </div>
@@ -1142,18 +1142,36 @@ function reconstructSoulMd() {{
 
 function saveSoul() {{
   const content = reconstructSoulMd();
-  const blob = new Blob([content], {{ type: 'text/markdown' }});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'SOUL.md';
-  a.click();
-  URL.revokeObjectURL(url);
-
-  // Toast
   const toast = document.getElementById('save-toast');
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2000);
+
+  // Try server-side save first (works in --serve mode)
+  fetch('/save-soul', {{
+    method: 'POST',
+    headers: {{ 'Content-Type': 'text/markdown' }},
+    body: content
+  }})
+  .then(resp => {{
+    if (resp.ok) {{
+      toast.textContent = '✓ SOUL.md saved to workspace';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }} else {{
+      throw new Error('Server save failed');
+    }}
+  }})
+  .catch(() => {{
+    // Fallback: browser download (static HTML mode)
+    const blob = new Blob([content], {{ type: 'text/markdown' }});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SOUL.md';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.textContent = '✓ SOUL.md downloaded';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }});
 }}
 
 // --- Timeline ---
@@ -2251,12 +2269,42 @@ def main():
         with open(os.path.join(out_dir, "soul-mindmap.html"), "w") as f:
             f.write(mindmap_html)
 
+        soul_path = os.path.join(workspace, "SOUL.md")
+
+        class EvoclawHandler(http.server.SimpleHTTPRequestHandler):
+            def do_POST(self):
+                if self.path == "/save-soul":
+                    length = int(self.headers.get("Content-Length", 0))
+                    body = self.rfile.read(length).decode("utf-8")
+                    try:
+                        with open(soul_path, "w") as f:
+                            f.write(body)
+                        self.send_response(200)
+                        self.send_header("Content-Type", "text/plain")
+                        self.end_headers()
+                        self.wfile.write(b"OK")
+                        print(f"  ✓ SOUL.md saved ({len(body)} bytes)")
+                    except Exception as e:
+                        self.send_response(500)
+                        self.send_header("Content-Type", "text/plain")
+                        self.end_headers()
+                        self.wfile.write(str(e).encode())
+                        print(f"  ✗ Save failed: {e}")
+                else:
+                    self.send_response(404)
+                    self.end_headers()
+
+            def log_message(self, format, *args):
+                # Suppress GET request logging noise
+                if "POST" in str(args):
+                    super().log_message(format, *args)
+
         os.chdir(out_dir)
         print(f"\n  → Serving at http://localhost:{port}/soul-evolution.html")
-        print(f"  → Mindmap at  http://localhost:{port}/soul-mindmap.html\n")
+        print(f"  → Mindmap at  http://localhost:{port}/soul-mindmap.html")
+        print(f"  → Edits save directly to: {soul_path}\n")
 
-        handler = http.server.SimpleHTTPRequestHandler
-        with socketserver.TCPServer(("", port), handler) as httpd:
+        with socketserver.TCPServer(("", port), EvoclawHandler) as httpd:
             try:
                 httpd.serve_forever()
             except KeyboardInterrupt:
