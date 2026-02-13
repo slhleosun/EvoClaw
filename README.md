@@ -7,7 +7,7 @@
 
 ## Quick Install
 
-Send this to your [OpenClaw](https://openclaw.com) agent:
+Send this to your [OpenClaw](https://openclaw.ai) agent:
 
 ```
 Read https://evoclaw.dev/install.md and follow the instructions to install EvoClaw
@@ -149,7 +149,7 @@ Read evoclaw/configure.md and evoclaw/SKILL.md in your workspace and follow the 
 
 ## Requirements
 
-- An [OpenClaw](https://openclaw.com) agent with workspace access
+- An [OpenClaw](https://openclaw.ai) agent with workspace access
 - Python 3 (for validators and visualization — stdlib only, no pip)
 - A heartbeat configured to run periodically
 
