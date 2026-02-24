@@ -1,6 +1,6 @@
 # 🧬 EvoClaw - Experience, Reflect, Evolve
 
-**A structured soul evolution framework that makes your agents actually learn from experience.**
+**A soul & memory management framework that enables structured evolution for OpenClaw agents. Make your agents actually learn from experience!**
 
 
 [evoclaw.dev](https://evoclaw.dev)
